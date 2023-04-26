@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    tools:context=".fragment.Counter">
 
     <TextureView
         android:id="@+id/textureView3"
@@ -15,8 +15,9 @@
         android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textureView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintVertical_bias="0.092"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -24,18 +25,22 @@
         android:layout_height="33dp"
         android:text="                         XXXXX"
         app:layout_constraintEnd_toEndOf="@+id/textureView3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textureView3"
-        tools:layout_editor_absoluteY="373dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="389dp" />
 
     <TextureView
         android:id="@+id/textureView"
         android:layout_width="385dp"
         android:layout_height="66dp"
-        android:layout_marginTop="256dp"
         android:foregroundTint="#FAFAFA"
         android:hapticFeedbackEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="10dp" />
+        app:layout_constraintVertical_bias="0.357"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -45,5 +50,6 @@
         app:layout_constraintEnd_toEndOf="@+id/textureView"
         app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="@+id/textureView"
-        tools:layout_editor_absoluteY="271dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="253dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

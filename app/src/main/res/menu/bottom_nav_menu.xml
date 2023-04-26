@@ -2,24 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item
-        android:id="@+id/courses_tab"
+    <item android:id="@+id/counter"
         android:icon="@drawable/ic_time"
-
         android:title="Counter"/>
 
-    <item
-        android:id="@+id/groups_tab"
+    <item android:id="@+id/profile"
         android:icon="@drawable/ic_people"
-
         android:title="" />
 
 
-    <item
-        android:id="@+id/myunijet_tab"
-
+    <item android:id="@+id/stats"
         android:icon="@drawable/ic_baseline_pie_chart_24"
-
         android:title="Stats" />
 
 
