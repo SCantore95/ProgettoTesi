@@ -19,7 +19,7 @@
                 android:topRightRadius="20dp"/>
 
             <stroke
-                android:color="@color/colorAccent"
+                android:color="@color/black"
                 android:width="20dp"/>
 
         </shape>

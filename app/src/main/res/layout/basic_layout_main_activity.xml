@@ -15,15 +15,15 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
-        android:backgroundTint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
+        android:backgroundTint="@color/black"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
         app:fabAlignmentMode="center"
-        app:fabCradleRoundedCornerRadius="12dp"
         app:fabCradleMargin="7dp"
+        app:fabCradleRoundedCornerRadius="12dp"
         app:fabCradleVerticalOffset="1dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,16 +32,15 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="0dp"
             android:layout_marginVertical="5dp"
-            app:itemIconSize="24dp"
             android:background="@drawable/bottom_navbar_drawable"
-            app:itemTextColor="@android:color/white"
+            app:itemIconSize="24dp"
             app:itemIconTint="@android:color/white"
+            app:itemRippleColor="#3F51B5"
 
-            app:itemRippleColor="#C5BDD6"
+            app:itemTextColor="@color/white"
 
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
-
 
 
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -53,9 +52,9 @@
         android:contentDescription="@string/app_name"
         android:elevation="12dp"
         android:src="@drawable/ic_baseline_person_24"
-        app:tint="#FFF"
         app:backgroundTint="@color/black"
-        app:layout_anchor="@id/bottomNavigationView" />
+        app:layout_anchor="@id/bottomAppBar"
+        app:tint="#FFF" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    tools:context=".fragment.StatsFragment">
 
     <TextView
         android:id="@+id/textView5"
@@ -13,7 +13,8 @@
         android:text="Pie charts"
         app:layout_constraintEnd_toEndOf="@+id/textureView2"
         app:layout_constraintStart_toStartOf="@+id/textureView2"
-        tools:layout_editor_absoluteY="378dp" />
+        tools:layout_editor_absoluteY="378dp"
+        tools:ignore="MissingConstraints" />
 
     <TextureView
         android:id="@+id/textureView2"
@@ -23,7 +24,8 @@
         android:foregroundTint="#FAFAFA"
         android:hapticFeedbackEnabled="true"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="219dp" />
+        tools:layout_editor_absoluteX="219dp"
+        tools:ignore="MissingConstraints" />
 
     <TextureView
         android:id="@+id/textureView"
@@ -33,7 +35,8 @@
         android:foregroundTint="#FAFAFA"
         android:hapticFeedbackEnabled="true"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -42,7 +45,8 @@
         android:src="@drawable/ic_baseline_pie_chart_24"
         app:layout_constraintEnd_toEndOf="@+id/textureView2"
         app:layout_constraintStart_toStartOf="@+id/textureView2"
-        tools:layout_editor_absoluteY="300dp" />
+        tools:layout_editor_absoluteY="300dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
@@ -51,7 +55,8 @@
         android:text="Bar charts"
         app:layout_constraintEnd_toEndOf="@+id/textureView"
         app:layout_constraintStart_toStartOf="@+id/textureView"
-        tools:layout_editor_absoluteY="377dp" />
+        tools:layout_editor_absoluteY="377dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -60,6 +65,7 @@
         android:src="@drawable/ic_baseline_bar_chart_24"
         app:layout_constraintEnd_toEndOf="@+id/textureView"
         app:layout_constraintStart_toStartOf="@+id/textureView"
-        tools:layout_editor_absoluteY="300dp" />
+        tools:layout_editor_absoluteY="300dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

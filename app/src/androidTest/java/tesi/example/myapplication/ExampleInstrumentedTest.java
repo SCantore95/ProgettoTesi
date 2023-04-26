@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package tesi.example.myapplication;
 
 import android.content.Context;
 
