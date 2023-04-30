@@ -8,13 +8,13 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.fragment.CounterFragment;
 import tesi.example.myapplication.fragment.ProfileFragment;
 import tesi.example.myapplication.fragment.StatsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import easy.tuto.bottomnavigationfragmentdemo.R;
 
 
 public class MainActivity extends AppCompatActivity {
