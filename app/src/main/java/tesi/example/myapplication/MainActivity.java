@@ -5,6 +5,7 @@ package tesi.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,19 +14,25 @@ import tesi.example.myapplication.fragment.CounterFragment;
 import tesi.example.myapplication.fragment.ProfileFragment;
 import tesi.example.myapplication.fragment.StatsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    BottomSheetDialog bottomSheetDialog;
     CounterFragment counter = new CounterFragment();
     StatsFragment stats = new StatsFragment();
     ProfileFragment profile = new ProfileFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.basic_layout_main_activity);
+
 
         bottomNavigationView  = findViewById(R.id.bottomNavigationView);
 
