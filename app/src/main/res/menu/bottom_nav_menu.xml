@@ -7,8 +7,8 @@
         android:title="Counter"/>
 
     <item android:id="@+id/profile"
-        android:icon="@drawable/ic_people"
-        android:title="" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
 
 
     <item android:id="@+id/stats"
