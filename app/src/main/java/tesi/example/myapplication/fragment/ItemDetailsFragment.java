@@ -1,7 +1,10 @@
 package tesi.example.myapplication.fragment;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,9 +64,10 @@ public class ItemDetailsFragment extends Fragment {
         if (bundle  != null) {
             // Estrai i dati dall'intent
             String id = bundle.getString("id");
+            Log.d(TAG, "iditem details: "+id);
             String description=bundle.getString("description");
             String offenseType=bundle.getString("offenseType");
-            String offenseSource=bundle.getString("offenceSource");
+            String offenseSource=bundle.getString("offenseSource");
             String magnitude=bundle.getString("magnitude");
             String sourceIPs=bundle.getString("sourceIPs");
             String destinationIPs=bundle.getString("destinationIPs");

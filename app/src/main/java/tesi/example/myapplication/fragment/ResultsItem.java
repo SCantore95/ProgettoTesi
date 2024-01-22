@@ -1,6 +1,11 @@
 package tesi.example.myapplication.fragment;
 
-public class ResultsItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class ResultsItem implements Parcelable {
     String description;
     String destinationIPs;
     String events;
@@ -14,11 +19,20 @@ public class ResultsItem {
     String startDate;
     String flows;
     String lastEventsFlow;
+    String destinationFragmentTag;
+
+    public void setDestinationFragmentTag(String destinationFragmentTag) {
+        this.destinationFragmentTag = destinationFragmentTag;
+    }
+
+    public String getDestinationFragmentTag() {
+        return destinationFragmentTag;
+    }
 
 
     public ResultsItem(String description, String destinationIPs, String events, String logSources, String magnitude,
                        String offenceSource, String offenseType, String sourceIPs, String users, String id,
-                       String startDate,String flows,String lastEventsFlow) {
+                       String startDate, String flows, String lastEventsFlow) {
         this.description = description;
         this.destinationIPs = destinationIPs;
         this.events = events;
@@ -29,9 +43,9 @@ public class ResultsItem {
         this.sourceIPs = sourceIPs;
         this.users = users;
         this.id = id;
-        this.startDate=startDate;
-        this.flows=flows;
-        this.lastEventsFlow=lastEventsFlow;
+        this.startDate = startDate;
+        this.flows = flows;
+        this.lastEventsFlow = lastEventsFlow;
 
     }
 
@@ -83,34 +97,122 @@ public class ResultsItem {
         return offenceSource;
     }
 
-    public void setOffenceSource(String offenceSource) {this.offenceSource = offenceSource;}
+    public void setOffenceSource(String offenceSource) {
+        this.offenceSource = offenceSource;
+    }
 
 
-    public String getOffenseType() {return offenseType;}
+    public String getOffenseType() {
+        return offenseType;
+    }
 
-    public void setOffenseType(String offenseType) {this.offenseType = offenseType;}
+    public void setOffenseType(String offenseType) {
+        this.offenseType = offenseType;
+    }
 
-    public String getSourceIPs() {return sourceIPs;}
+    public String getSourceIPs() {
+        return sourceIPs;
+    }
 
-    public void setSourceIPs(String sourceIPs) {this.sourceIPs = sourceIPs;}
+    public void setSourceIPs(String sourceIPs) {
+        this.sourceIPs = sourceIPs;
+    }
 
-    public String getUsers() {return users;}
+    public String getUsers() {
+        return users;
+    }
 
-    public void setUsers(String users) {this.users = users;}
+    public void setUsers(String users) {
+        this.users = users;
+    }
 
-    public String getId() {return id;}
+    public String getId() {
+        return id;
+    }
 
-    public void setId(String id) {this.id = id;}
-    public String getStartDate() {return startDate;}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public void setStartDate(String startDate) {this.startDate = startDate;}
-    public String getFlows() {return flows;}
+    public String getStartDate() {
+        return startDate;
+    }
 
-    public void setFlows(String flows) {this.flows = flows;}
-    public String getLastEventsFlow() {return lastEventsFlow;}
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
 
-    public void setLastEventsFlow(String lastEventsFlow) {this.lastEventsFlow = lastEventsFlow;}
+    public String getFlows() {
+        return flows;
+    }
 
+    public void setFlows(String flows) {
+        this.flows = flows;
+    }
+
+    public String getLastEventsFlow() {
+        return lastEventsFlow;
+    }
+
+    public void setLastEventsFlow(String lastEventsFlow) {
+        this.lastEventsFlow = lastEventsFlow;
+    }
+
+    protected ResultsItem(Parcel in) {
+        // Leggi i dati da Parcel e inizializza gli attributi
+        description = in.readString();
+        destinationIPs = in.readString();
+        events = in.readString();
+        logSources = in.readString();
+        magnitude = in.readString();
+        offenceSource = in.readString();
+        offenseType = in.readString();
+        sourceIPs = in.readString();
+        users = in.readString();
+        id = in.readString();
+        startDate = in.readString();
+        flows = in.readString();
+        lastEventsFlow = in.readString();
+        destinationFragmentTag = in.readString();
+
+    }
+
+    public static final Creator<ResultsItem> CREATOR = new Creator<ResultsItem>() {
+        @Override
+        public ResultsItem createFromParcel(Parcel in) {
+            return new ResultsItem(in);
+        }
+
+        @Override
+        public ResultsItem[] newArray(int size) {
+            return new ResultsItem[size];
+        }
+
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(description);
+        dest.writeString(destinationIPs);
+        dest.writeString(events);
+        dest.writeString(logSources);
+        dest.writeString(magnitude);
+        dest.writeString(offenceSource);
+        dest.writeString(offenseType);
+        dest.writeString(sourceIPs);
+        dest.writeString(users);
+        dest.writeString(id);
+        dest.writeString(startDate);
+        dest.writeString(flows);
+        dest.writeString(lastEventsFlow);
+        dest.writeString(destinationFragmentTag);
+
+    }
 
 }
 

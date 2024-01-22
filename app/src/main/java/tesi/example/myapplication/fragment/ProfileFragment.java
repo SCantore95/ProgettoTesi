@@ -29,16 +29,18 @@ import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
 
-public class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
+public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
     private static final int LOADER_ID = 1;
     private static final String JSON_URL = "https://run.mocky.io/v3/8331fd23-68c0-44ea-95da-a7cc7602b262";
     private static final String TAG = "ProfileFragment";
+    private ItemClickListener mItemClickListener;
 
     private List<ResultsItem> attackLists;
     private RecyclerView recyclerView;
     private Results resultsAdapter;
     private Context mContext;
+    private ProfileDataListener dataListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +49,23 @@ public class ProfileFragment extends Fragment implements ItemClickListener, Load
 
     @Override
     public void onAttach(Context context) {
+
         super.onAttach(context);
+        Log.d(TAG, "ProfileFragment attached to activity");
         mContext = context;
+        try {
+            // Assicurati che l'Activity ospitante implementi l'interfaccia
+            dataListener = (ProfileDataListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " deve implementare ProfileDataListener");
+        }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         attackLists = new ArrayList<>();
+        mItemClickListener = this;
         LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
         return view;
     }
@@ -86,17 +97,110 @@ public class ProfileFragment extends Fragment implements ItemClickListener, Load
         if (resultsAdapter != null) {
             resultsAdapter.updateData(attackLists);
         }
+        if (dataListener != null) {
+            dataListener.onProfileDataAvailable(attackLists);
+            Log.d(TAG, "updateData to send: Data updated in CounterFragment. Size: " + dataListener);
+        }
+
+
     }
 
+
+
     @Override
-    public void onItemClick(Intent intent) {
+    public void onItemClick(ResultsItem currentItem) {
+        String destinationFragmentTag = currentItem.getDestinationFragmentTag();
+
+        if ("ItemDetailsFragment".equals(destinationFragmentTag)) {
+            onItemDetailsFragmentClick(currentItem);
+            Log.d(TAG, "viene chiamato:ok ");
+
+        } else if ("StatsFragmentTag".equals(destinationFragmentTag)) {
+           //onStatsFragmentClick(currentItem);
+        }
+    }
+
+
+
+    @Override
+    public void onItemDetailsFragmentClick(ResultsItem intent) {
+        // Estrai i dati dall'intent
+        String id =  intent.getId();
+        String description =  intent.getDescription();
+        String offenseType= intent.getOffenseType();
+        String offenseSource=intent.getOffenceSource();
+        String magnitude=intent.getMagnitude();
+        String sourceIPs=intent.getSourceIPs();
+        String destinationIPs=intent.getDestinationIPs();
+        String users=intent.getUsers();
+        String events=intent.getEvents();
+        String logSources=intent.getLogSources();
+        String startDate= intent.getStartDate();
+        String flows=intent.getFlows();
+        String lastEventsFlow=intent.getLastEventsFlow();
+
+
+        // Esempio: Stampa i dati nella console
+        Log.d(TAG, "Item ID: " + id);
+        Log.d(TAG, "Item Description: " + description);
+        Log.d(TAG, "Item startDate: " + startDate);
+
+        // Puoi anche passare questi dati al tuo ItemDetailsFragment
         if (getActivity() != null) {
+            ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
+
+            // Crea un nuovo Bundle per passare i dati
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            bundle.putString("description", description);
+            bundle.putString("offenseType", offenseType);
+            bundle.putString("offenseSource", offenseSource);
+            bundle.putString("magnitude", magnitude);
+            bundle.putString("sourceIPs", sourceIPs);
+            bundle.putString("destinationIPs", destinationIPs);
+            bundle.putString("users", users);
+            bundle.putString("events", events);
+            bundle.putString("logSources", logSources);
+            bundle.putString("startDate", startDate);
+            bundle.putString("flows", flows);
+            bundle.putString("lastEventsFlow", lastEventsFlow);
+
+
+            itemDetailsFragment.setArguments(bundle);
+
+            // Aggiorna la lista nel tuo adapter
+            if (resultsAdapter != null) {
+                resultsAdapter.updateData(attackLists);
+            }
+
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, ItemDetailsFragment.newInstance(intent))
+                    .replace(R.id.fragment_container, itemDetailsFragment)
                     .addToBackStack(null)
                     .commit();
         }
+    }
+
+    public interface ProfileDataListener {
+        void onDataReceived(String data);
+
+        void onProfileDataAvailable(List<ResultsItem> attackLists);
+
+
+    }
+    @Override
+    public void onProfileDataAvailable(List<ResultsItem> attackLists) {
+        Log.d(TAG, "onProfileDataAvailable: Data available. Size: " + (attackLists != null ? attackLists.size() : 0));
+
+        // Aggiorna l'adapter o esegui altre operazioni necessarie con attackLists
+        if (resultsAdapter != null) {
+            resultsAdapter.updateData(attackLists);
+        }
+    }
+
+    @Override
+    public void onStatsFragmentClick(Intent intent) {
+
     }
 
     private static class GetDataLoader extends AsyncTaskLoader<List<ResultsItem>> {
@@ -164,4 +268,5 @@ public class ProfileFragment extends Fragment implements ItemClickListener, Load
             return null;
         }
     }
+
 }
