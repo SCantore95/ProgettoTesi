@@ -100,9 +100,9 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.P
     public void onProfileDataAvailable(List<ResultsItem> attackLists) {
         // Chiamato quando i dati sono disponibili in ProfileFragment
         // Puoi ora passare questi dati a CounterFragment o fare qualsiasi altra operazione necessaria
-        if (counter.isVisible()) {
+
             counter.updateCounterData(attackLists);
-            Log.d(TAG, "Data passed to CounterFragment. Size: " + attackLists.size());
-        }
+            Log.d(TAG, "Data passed to CounterFragment. Size w: " + attackLists.size());
+
     }
 }
