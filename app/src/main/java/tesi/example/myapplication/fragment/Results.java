@@ -3,7 +3,6 @@ package tesi.example.myapplication.fragment;
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
@@ -56,45 +54,31 @@ public class Results extends RecyclerView.Adapter<Results.MyViewHolder> {
         return mData.size();
     }
 
-    @Override
     public void onBindViewHolder(@NonNull Results.MyViewHolder holder, int position) {
         ResultsItem currentItem = mData.get(position);
 
-
         holder.id.setText(currentItem.getId());
-        Log.d(TAG, "getId(): " + mData.get(position).getId());
-
-
-
-
 
         holder.id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (itemClickListener != null) {
 
-                    Intent intent = new Intent(mContext, ItemDetailsFragment.class);
-                    intent.putExtra("id", (currentItem.getId()));
-                    intent.putExtra("description", (currentItem.getDescription()));
-                    intent.putExtra("offenseType", (currentItem.getOffenseType()));
-                    intent.putExtra("offenceSource", (currentItem.getOffenceSource()));
-                    intent.putExtra("magnitude", (currentItem.getMagnitude()));
-                    intent.putExtra("sourceIPs", (currentItem.getSourceIPs()));
-                    intent.putExtra("destinationIPs", (currentItem.getDestinationIPs()));
-                    intent.putExtra("users", (currentItem.getUsers()));
-                    intent.putExtra("events", (currentItem.getEvents()));
-                    intent.putExtra("logSources", (currentItem.getLogSources()));
-                    intent.putExtra("startDate", (currentItem.getStartDate()));
-                    intent.putExtra("flows", (currentItem.getFlows()));
-                    intent.putExtra("lastEventsFlow", (currentItem.getLastEventsFlow()));
-                    itemClickListener.onItemClick(intent);
-                    Log.d(TAG, "doInBackground() returned: " + intent);
-                }
 
+
+                    currentItem.setDestinationFragmentTag("ItemDetailsFragment");
+
+                    // Copia i dati dall'elemento corrente
+
+                    // Aggiungi altri campi se necessario
+
+                    // Passa l'oggetto a onItemDetailsFragmentClick
+                    itemClickListener.onItemDetailsFragmentClick(currentItem);
+                }
             }
         });
-
     }
+
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView id;
