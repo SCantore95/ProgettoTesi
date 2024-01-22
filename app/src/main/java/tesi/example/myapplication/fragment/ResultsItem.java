@@ -197,20 +197,20 @@ public class ResultsItem implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(description);
-        dest.writeString(destinationIPs);
-        dest.writeString(events);
-        dest.writeString(logSources);
-        dest.writeString(magnitude);
-        dest.writeString(offenceSource);
-        dest.writeString(offenseType);
-        dest.writeString(sourceIPs);
-        dest.writeString(users);
-        dest.writeString(id);
-        dest.writeString(startDate);
-        dest.writeString(flows);
-        dest.writeString(lastEventsFlow);
-        dest.writeString(destinationFragmentTag);
+        dest.writeString(this.description);
+        dest.writeString(this.destinationIPs);
+        dest.writeString(this.events);
+        dest.writeString(this.logSources);
+        dest.writeString(this.magnitude);
+        dest.writeString(this.offenceSource);
+        dest.writeString(this.offenseType);
+        dest.writeString(this.sourceIPs);
+        dest.writeString(this.users);
+        dest.writeString(this.id);
+        dest.writeString(this.startDate);
+        dest.writeString(this.flows);
+        dest.writeString(this.lastEventsFlow);
+        dest.writeString(this.destinationFragmentTag);
 
     }
 
