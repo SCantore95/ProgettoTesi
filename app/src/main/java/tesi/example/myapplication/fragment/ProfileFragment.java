@@ -1,7 +1,6 @@
 package tesi.example.myapplication.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,11 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
+import tesi.example.myapplication.Interface.ItemClickListener;
 
 public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
     private static final int LOADER_ID = 1;
-    private static final String JSON_URL = "https://run.mocky.io/v3/8331fd23-68c0-44ea-95da-a7cc7602b262";
+    private static final String JSON_URL = "https://run.mocky.io/v3/5af3d8be-2b70-4129-89c6-f2657c1f7ae9";
     private static final String TAG = "ProfileFragment";
     private ItemClickListener mItemClickListener;
 
@@ -80,6 +80,10 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
         if (data != null) {
             attackLists = data;
             PutDataIntoRecyclerView(attackLists);
+            if (dataListener != null) {
+                dataListener.onProfileDataAvailable(attackLists);
+                Log.d(TAG, "updateData to send: Data updated in CounterFragment. Size: " + dataListener);
+            }
         }
     }
 
@@ -192,16 +196,14 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
     public void onProfileDataAvailable(List<ResultsItem> attackLists) {
         Log.d(TAG, "onProfileDataAvailable: Data available. Size: " + (attackLists != null ? attackLists.size() : 0));
 
+
         // Aggiorna l'adapter o esegui altre operazioni necessarie con attackLists
         if (resultsAdapter != null) {
             resultsAdapter.updateData(attackLists);
         }
     }
 
-    @Override
-    public void onStatsFragmentClick(Intent intent) {
 
-    }
 
     private static class GetDataLoader extends AsyncTaskLoader<List<ResultsItem>> {
         private final String jsonUrl;
@@ -231,6 +233,8 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    // Gestisci l'eccezione in modo più robusto, ad esempio, restituendo una lista vuota
+                    return new ArrayList<>();
                 } finally {
                     if (urlConnection != null) {
                         urlConnection.disconnect();

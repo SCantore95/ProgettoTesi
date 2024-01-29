@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
+import tesi.example.myapplication.Interface.ItemClickListener;
 
 public class Results extends RecyclerView.Adapter<Results.MyViewHolder> {
 
