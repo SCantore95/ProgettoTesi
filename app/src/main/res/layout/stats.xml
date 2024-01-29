@@ -11,49 +11,44 @@
         android:id="@+id/textureView2"
         android:layout_width="176dp"
         android:layout_height="115dp"
-        android:layout_centerInParent="true"
         android:foregroundTint="#FAFAFA"
         android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="77dp"
-        android:layout_height="69dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_baseline_pie_chart_24"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pie charts"
         app:layout_constraintEnd_toEndOf="@+id/textureView2"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/textureView2"
-        app:layout_constraintTop_toTopOf="@+id/textureView2"
+        app:layout_constraintTop_toBottomOf="@+id/PieChart"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="76dp"
-        android:layout_height="20dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:text="Pie charts"
-        app:layout_constraintBottom_toBottomOf="@+id/textureView2"
-        app:layout_constraintEnd_toEndOf="@+id/textureView2"
-        app:layout_constraintStart_toStartOf="@+id/textureView2"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bar charts"
+        app:layout_constraintEnd_toEndOf="@+id/textureView"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="@+id/textureView"
+        app:layout_constraintTop_toBottomOf="@+id/BarChart"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/BarChart"
         android:layout_width="77dp"
         android:layout_height="69dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="16dp"
         android:src="@drawable/ic_baseline_bar_chart_24"
         app:layout_constraintEnd_toEndOf="@+id/textureView"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="@+id/textureView"
         app:layout_constraintTop_toTopOf="@+id/textureView"
         tools:ignore="MissingConstraints" />
@@ -62,8 +57,7 @@
         android:id="@+id/textureView"
         android:layout_width="176dp"
         android:layout_height="115dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="48dp"
         android:foregroundTint="#FAFAFA"
         android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,15 +65,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="76dp"
-        android:layout_height="20dp"
-        android:layout_centerInParent="true"
-        android:text="Bar charts"
-        app:layout_constraintEnd_toEndOf="@+id/textureView"
-        app:layout_constraintStart_toStartOf="@+id/textureView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+    <ImageView
+        android:id="@+id/PieChart"
+        android:layout_width="77dp"
+        android:layout_height="69dp"
+        android:src="@drawable/ic_baseline_pie_chart_24"
+        app:layout_constraintEnd_toEndOf="@+id/textureView2"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/textureView2"
+        app:layout_constraintTop_toTopOf="@+id/textureView2"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="463dp"
+        android:padding="16dp"
+        tools:layout_editor_absoluteY="160dp">
+
+
+        <TextView
+            android:id="@+id/textLastEventsFlow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="Last Events/Flow:"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFlows" />
+
+        <TextView
+            android:id="@+id/textFlows"
+            android:layout_width="0dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="Flows:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textStartDate" />
+
+        <TextView
+            android:id="@+id/textId"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="Id "
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.156"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLastEventsFlow" />
+
+        <TextView
+            android:id="@+id/textStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="StartDate:"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textUsers" />
+
+        <TextView
+            android:id="@+id/textUsers"
+            android:layout_width="0dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="Users"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSourceIPs" />
+
+        <TextView
+            android:id="@+id/textViewOffenseType"
+            android:layout_width="0dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="OffenseType"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOffenceSource" />
+
+        <TextView
+            android:id="@+id/textViewSourceIPs"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="SourceIPs"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOffenseType" />
+
+        <TextView
+            android:id="@+id/textViewOffenceSource"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:text="OffenceSource"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMagnitude" />
+
+        <TextView
+            android:id="@+id/textViewMagnitude"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:text="Magnitude"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLogSources" />
+
+        <TextView
+            android:id="@+id/textViewEvents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:text="Events"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDestinationIPs" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Description: "
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.143" />
+
+        <TextView
+            android:id="@+id/textViewDestinationIPs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="DestinationIPs: "
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
+
+        <TextView
+            android:id="@+id/textViewLogSources"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewEvents"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:text="LogSources"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEvents" />
+
+
+        <!-- Aggiungi TextView per gli altri campi -->
+
+        <!-- Aggiungi TextView per gli altri campi -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

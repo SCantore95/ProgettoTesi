@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- pie_chart_fragment.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Aggiungi altre viste o layout se necessario -->
+
+    <!-- Aggiungi il tuo PieChart -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        tools:context="tesi.example.myapplication.fragment.PieChartFragment"
+        tools:ignore="MissingClass" />
+
+
+</RelativeLayout>

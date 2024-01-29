@@ -1,8 +1,8 @@
-package tesi.example.myapplication.fragment;
-
-import android.content.Intent;
+package tesi.example.myapplication.Interface;
 
 import java.util.List;
+
+import tesi.example.myapplication.fragment.ResultsItem;
 
 public interface ItemClickListener {
     void onItemClick(ResultsItem currentItem);
@@ -14,7 +14,7 @@ public interface ItemClickListener {
 
     void onProfileDataAvailable(List<ResultsItem> attackLists);
 
-    void onStatsFragmentClick(Intent intent);
+
 
 
 }
