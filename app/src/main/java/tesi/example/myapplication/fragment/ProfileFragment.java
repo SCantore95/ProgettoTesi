@@ -28,6 +28,7 @@ import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.Interface.ItemClickListener;
+import tesi.example.myapplication.MainActivity;
 
 public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
@@ -47,15 +48,21 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
         super.onCreate(savedInstanceState);
     }
 
+
+    // Altri codici del fragment
+
+
     @Override
     public void onAttach(Context context) {
 
         super.onAttach(context);
         Log.d(TAG, "ProfileFragment attached to activity");
         mContext = context;
+
         try {
             // Assicurati che l'Activity ospitante implementi l'interfaccia
             dataListener = (ProfileDataListener) context;
+
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " deve implementare ProfileDataListener");
         }
@@ -66,6 +73,10 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
         recyclerView = view.findViewById(R.id.recyclerView);
         attackLists = new ArrayList<>();
         mItemClickListener = this;
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).showBottomNavigationView();
+        }
+
         LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
         return view;
     }
@@ -129,19 +140,19 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
     @Override
     public void onItemDetailsFragmentClick(ResultsItem intent) {
         // Estrai i dati dall'intent
-        String id =  intent.getId();
-        String description =  intent.getDescription();
-        String offenseType= intent.getOffenseType();
-        String offenseSource=intent.getOffenceSource();
-        String magnitude=intent.getMagnitude();
-        String sourceIPs=intent.getSourceIPs();
-        String destinationIPs=intent.getDestinationIPs();
-        String users=intent.getUsers();
-        String events=intent.getEvents();
-        String logSources=intent.getLogSources();
-        String startDate= intent.getStartDate();
-        String flows=intent.getFlows();
-        String lastEventsFlow=intent.getLastEventsFlow();
+        String id = intent.getId();
+        String description = intent.getDescription();
+        String offenseType = intent.getOffenseType();
+        String offenseSource = intent.getOffenceSource();
+        String magnitude = intent.getMagnitude();
+        String sourceIPs = intent.getSourceIPs();
+        String destinationIPs = intent.getDestinationIPs();
+        String users = intent.getUsers();
+        String events = intent.getEvents();
+        String logSources = intent.getLogSources();
+        String startDate = intent.getStartDate();
+        String flows = intent.getFlows();
+        String lastEventsFlow = intent.getLastEventsFlow();
 
 
         // Esempio: Stampa i dati nella console
@@ -150,8 +161,9 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
         Log.d(TAG, "Item startDate: " + startDate);
 
         // Puoi anche passare questi dati al tuo ItemDetailsFragment
+        ItemDetailsFragment itemDetailsFragment = null;
         if (getActivity() != null) {
-            ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
+            itemDetailsFragment = new ItemDetailsFragment();
 
             // Crea un nuovo Bundle per passare i dati
             Bundle bundle = new Bundle();
@@ -171,19 +183,24 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
 
 
             itemDetailsFragment.setArguments(bundle);
-
-            // Aggiorna la lista nel tuo adapter
-            if (resultsAdapter != null) {
-                resultsAdapter.updateData(attackLists);
-            }
-
-
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, itemDetailsFragment)
-                    .addToBackStack(null)
-                    .commit();
         }
+
+        // Aggiorna la lista nel tuo adapter
+        if (resultsAdapter != null) {
+            resultsAdapter.updateData(attackLists);
+        }
+
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, itemDetailsFragment)
+                .addToBackStack(null)
+                .commit();
+
+
+
+
+
     }
 
     public interface ProfileDataListener {

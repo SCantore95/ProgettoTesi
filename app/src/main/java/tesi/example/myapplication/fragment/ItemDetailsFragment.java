@@ -2,6 +2,7 @@ package tesi.example.myapplication.fragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
-import tesi.example.myapplication.Interface.OnBackPressedListener;
+import tesi.example.myapplication.MainActivity;
 
 public class ItemDetailsFragment extends Fragment {
 
@@ -34,20 +35,10 @@ public class ItemDetailsFragment extends Fragment {
     private TextView textViewLastEventsFlow;
 
     // Aggiungi altri TextView per gli altri campi
-    private OnBackPressedListener onBackPressedListener;
+
     private Context mContext;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        mContext = context;
-        if (context instanceof OnBackPressedListener) {
-            onBackPressedListener = (OnBackPressedListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnBackPressedListener");
-        }
-    }
+
 
 
 
@@ -56,6 +47,20 @@ public class ItemDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.item_details, container, false);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageButton backButton = view.findViewById(R.id.backButton);
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).hideBottomNavigationView();
+        }
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+
+
+
+
+            }
+        });
 
 
         // Trova le TextView nel layout
@@ -107,6 +112,8 @@ public class ItemDetailsFragment extends Fragment {
             textViewLastEventsFlow.setText("Last Events/Flow:" + lastEventsFlow);
         }
 
+
+
         // Trova altri TextView per gli altri campi
 
         // Ora puoi usare questi TextView per visualizzare i dati ricevuti
@@ -120,6 +127,7 @@ public class ItemDetailsFragment extends Fragment {
         fragment.setArguments(intent.getExtras());
         return fragment;
     }
+
 
 
 
