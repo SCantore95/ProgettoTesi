@@ -3,7 +3,6 @@ package tesi.example.myapplication.fragment;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -33,55 +31,24 @@ import java.util.Locale;
 import java.util.Map;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
-import tesi.example.myapplication.Interface.OnBackPressedListener;
-import tesi.example.myapplication.MainActivity;
 
 // Nel tuo fragment Java
 public class BarChartFragment extends Fragment {
 
     private BarChart barChart;
     List<ResultsItem> currentData=new ArrayList<>();
-    private OnBackPressedListener onBackPressedListener;
-    private Context mContext;
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        mContext = context;
-        if (context instanceof OnBackPressedListener) {
-            onBackPressedListener = (OnBackPressedListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnBackPressedListener");
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bar_chart_fragment, container, false);
-
-
         // Inizializza il tuo PieChart
         barChart = view.findViewById(R.id.barChart);
         ImageButton backButton = view.findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Gestisci l'azione del pulsante Indietro
-                if (onBackPressedListener != null && mContext instanceof MainActivity) {
-                    MainActivity mainActivity = (MainActivity) mContext;
-                    // Ora puoi utilizzare mainActivity.getSupportFragmentManager() per ottenere il FragmentManager e gestire i fragment.
-                    onBackPressedListener.onBackButtonPressed(MainActivity.class);
-                }
-            }
-        });
-
-        // Altre inizializzazioni o operazioni necessarie
+        backButton.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {getActivity().onBackPressed();}});
 
         return view;
     }
 
-    ;
+
 
 
     // Metodo di utilità per estrarre i dati relativi ai vari mesi dalla lista di ResultsItem
@@ -171,7 +138,6 @@ public class BarChartFragment extends Fragment {
 
     public void setBarChartData(List<ResultsItem>  entries) {
         BarData entrie = extractBarChartData(entries);
-        // PieData data = new PieData(dataSet);
         barChart.setData(entrie);
         barChart.invalidate();
         barChart.getDescription().setEnabled(false);

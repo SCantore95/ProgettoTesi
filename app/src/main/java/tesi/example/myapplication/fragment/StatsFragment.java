@@ -17,6 +17,7 @@ import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.Interface.StatsDataListener;
+import tesi.example.myapplication.MainActivity;
 
 public class StatsFragment extends Fragment implements View.OnClickListener, StatsDataListener {
 
@@ -32,7 +33,24 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
         this.statsDataListener = listener;
 
     }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.stats, container, false);
 
+
+
+        ImageView button1 = view.findViewById(R.id.BarChart);
+        ImageView button2 = view.findViewById(R.id.PieChart);
+
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+
+        Log.d(TAG, "StatsFragment onCreateView");
+
+
+        return view;
+    }
     @Override
     public void onStatsDataAvailable(List<ResultsItem> currentData) {
         // Chiamato quando i dati sono disponibili in StatsFragment
@@ -50,6 +68,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
         if (pieChartFragment == null) {
             // Aggiungi il fragment solo se non è già stato aggiunto
             pieChartFragment = new PieChartFragment();
+
         }
         if (statsDataListener != null) {
             statsDataListener.onStatsDataAvailable(currentData);
@@ -86,25 +105,14 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
 
         if (statsDataListener != null) {
             statsDataListener.onStatsButtonClick(buttonId);
+            if (getActivity() != null && getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).showBottomNavigationView();
+            }
+
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.stats, container, false);
 
-        ImageView button1 = view.findViewById(R.id.BarChart);
-        ImageView button2 = view.findViewById(R.id.PieChart);
-
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-
-        Log.d(TAG, "StatsFragment onCreateView");
-
-
-        return view;
-    }
 
     @Override
     public void onStatsButtonClick(int buttonId) {

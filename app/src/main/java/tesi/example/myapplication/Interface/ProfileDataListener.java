@@ -8,4 +8,5 @@ public interface ProfileDataListener {
     void onProfileDataAvailable(List<ResultsItem> data);
     void onDataReceived(String data);
 
+
 }
