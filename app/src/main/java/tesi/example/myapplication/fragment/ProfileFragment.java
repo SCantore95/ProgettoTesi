@@ -32,7 +32,7 @@ import tesi.example.myapplication.Interface.ItemClickListener;
 public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
     private static final int LOADER_ID = 1;
-    private static final String JSON_URL = "https://run.mocky.io/v3/5af3d8be-2b70-4129-89c6-f2657c1f7ae9";
+    private static final String JSON_URL = "https://run.mocky.io/v3/10a41b9a-1bf9-4c72-821c-103fa720ed22";
     private static final String TAG = "ProfileFragment";
     private ItemClickListener mItemClickListener;
 
@@ -120,7 +120,7 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
             Log.d(TAG, "viene chiamato:ok ");
 
         } else if ("StatsFragmentTag".equals(destinationFragmentTag)) {
-           //onStatsFragmentClick(currentItem);
+            //onStatsFragmentClick(currentItem);
         }
     }
 
@@ -176,6 +176,7 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
             if (resultsAdapter != null) {
                 resultsAdapter.updateData(attackLists);
             }
+
 
             getActivity().getSupportFragmentManager()
                     .beginTransaction()

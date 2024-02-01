@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.List;
 
 import tesi.example.myapplication.fragment.CounterFragment;
+import tesi.example.myapplication.fragment.ItemDetailsFragment;
 import tesi.example.myapplication.fragment.ProfileFragment;
 import tesi.example.myapplication.fragment.ResultsItem;
 import tesi.example.myapplication.fragment.StatsFragment;
@@ -22,9 +23,12 @@ import tesi.example.myapplication.fragment.PieChartFragment;
 import tesi.example.myapplication.fragment.BarChartFragment;
 import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.Interface.StatsDataListener;
+import android.view.WindowInsetsController;
+import androidx.core.view.WindowInsetsCompat;
+import tesi.example.myapplication.Interface.OnBackPressedListener;
 
 public class MainActivity extends AppCompatActivity implements
-        ProfileFragment.ProfileDataListener, StatsDataListener {
+        ProfileFragment.ProfileDataListener, StatsDataListener ,OnBackPressedListener{
 
     private static final String TAG = "mytag";
     List<ResultsItem> attackLists;
@@ -36,8 +40,10 @@ public class MainActivity extends AppCompatActivity implements
     ProfileFragment profile = new ProfileFragment();
     PieChartFragment pieChartFragment = new PieChartFragment();
     BarChartFragment barChartFragment = new BarChartFragment();
+    ItemDetailsFragment itemDetailsFragment=new ItemDetailsFragment();
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+    Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +84,13 @@ public class MainActivity extends AppCompatActivity implements
                     case R.id.stats:
 
                         transaction.hide(counter).hide(profile).show(stats).commit();
+                       // bottomNavigationView.setVisibility(View.GONE);
+
+
 
                         break;
+
+
                     // Aggiungi un caso per BarChartFragment se necessario
             /* case R.id.bar_chart:
                 transaction.hide(stats).show(barChartFragment).commit();
@@ -136,8 +147,13 @@ public class MainActivity extends AppCompatActivity implements
                     } else {
                         // Se il fragment è già stato aggiunto, mostra semplicemente il fragment
                         getSupportFragmentManager().beginTransaction().hide(stats).commit();
+                        transaction.add(R.id.fragment_container, pieChartFragment, "PieChartFragment");
+
                         getSupportFragmentManager().beginTransaction().show(pieChartFragment).addToBackStack(null).commit();
-                       // bottomNavigationView.setVisibility(View.GONE);
+                       bottomNavigationView.setVisibility(View.GONE);
+
+
+
 
                     }
                 }
@@ -158,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements
                     } else {
                         // Se il fragment è già stato aggiunto, mostra semplicemente il fragment
                         getSupportFragmentManager().beginTransaction().hide(stats).commit();
-                        //bottomNavigationView.setVisibility(View.GONE);
+                        bottomNavigationView.setVisibility(View.GONE);
                         getSupportFragmentManager().beginTransaction().show(barChartFragment).addToBackStack(null).commit();
                         //bottomNavigationView.setVisibility(View.VISIBLE);
 
@@ -169,6 +185,18 @@ public class MainActivity extends AppCompatActivity implements
                 }
                 // Altri casi se necessario
         }
+    }
+
+
+    @Override
+    public void onBackButtonPressed(Class<?> activityClass) {
+        if (activityClass == MainActivity.class) {
+            // Esegui le azioni desiderate quando il pulsante Indietro è premuto in MainActivity
+            // Ad esempio, potresti tornare al fragment desiderato o eseguire altre azioni necessarie.
+            bottomNavigationView.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction()
+                    .addToBackStack(null).hide(barChartFragment).hide(pieChartFragment).hide(itemDetailsFragment)
+                    .commit();        }
     }
 }
 

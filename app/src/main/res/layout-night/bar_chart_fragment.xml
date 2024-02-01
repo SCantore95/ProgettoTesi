@@ -10,10 +10,7 @@
     <!-- Aggiungi altre viste o layout se necessario -->
 
     <!-- Aggiungi il tuo PieChart -->
-    <include
-        layout="@layout/year_picker_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"

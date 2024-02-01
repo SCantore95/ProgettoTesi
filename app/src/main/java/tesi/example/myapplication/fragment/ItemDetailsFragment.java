@@ -2,6 +2,7 @@ package tesi.example.myapplication.fragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
+import tesi.example.myapplication.Interface.OnBackPressedListener;
 
 public class ItemDetailsFragment extends Fragment {
 
@@ -31,12 +34,29 @@ public class ItemDetailsFragment extends Fragment {
     private TextView textViewLastEventsFlow;
 
     // Aggiungi altri TextView per gli altri campi
+    private OnBackPressedListener onBackPressedListener;
+    private Context mContext;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        if (context instanceof OnBackPressedListener) {
+            onBackPressedListener = (OnBackPressedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnBackPressedListener");
+        }
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.item_details, container, false);
+
 
         // Trova le TextView nel layout
         textViewId = view.findViewById(R.id.textId);
