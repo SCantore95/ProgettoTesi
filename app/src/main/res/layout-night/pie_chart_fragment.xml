@@ -6,10 +6,6 @@
     android:layout_height="match_parent">
 
     <!-- Aggiungi altre viste o layout se necessario -->
-    <include
-        layout="@layout/year_picker_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <!-- Aggiungi il tuo PieChart -->
     <com.github.mikephil.charting.charts.PieChart

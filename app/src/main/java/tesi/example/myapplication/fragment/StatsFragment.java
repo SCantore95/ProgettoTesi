@@ -52,7 +52,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
             pieChartFragment = new PieChartFragment();
         }
         if (statsDataListener != null) {
-           statsDataListener.onStatsDataAvailable(currentData);
+            statsDataListener.onStatsDataAvailable(currentData);
             Log.d(TAG, "statsDataListener: "+statsDataListener.toString());
         }
 
@@ -97,10 +97,10 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
         ImageView button1 = view.findViewById(R.id.BarChart);
         ImageView button2 = view.findViewById(R.id.PieChart);
 
-         button1.setOnClickListener(this);
-         button2.setOnClickListener(this);
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
 
-    Log.d(TAG, "StatsFragment onCreateView");
+        Log.d(TAG, "StatsFragment onCreateView");
 
 
         return view;
@@ -117,4 +117,3 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
         }
     }
 }
-

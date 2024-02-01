@@ -1,10 +1,13 @@
 package tesi.example.myapplication.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -24,10 +27,26 @@ import java.util.Locale;
 import java.util.Map;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
+import tesi.example.myapplication.Interface.OnBackPressedListener;
+import tesi.example.myapplication.MainActivity;
 
 public class PieChartFragment extends Fragment {
     private List<ResultsItem> currentData=new ArrayList<>();
     private PieChart pieChart;
+    private OnBackPressedListener onBackPressedListener;
+    private Context mContext;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        if (context instanceof OnBackPressedListener) {
+            onBackPressedListener = (OnBackPressedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnBackPressedListener");
+        }
+    }
 
 
     @Override
@@ -36,6 +55,18 @@ public class PieChartFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.pie_chart_fragment, container, false);
         pieChart = view.findViewById(R.id.pieChart);
+        ImageButton backButton = view.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gestisci l'azione del pulsante Indietro
+                if (onBackPressedListener != null && mContext instanceof MainActivity) {
+                    MainActivity mainActivity = (MainActivity) mContext;
+                    // Ora puoi utilizzare mainActivity.getSupportFragmentManager() per ottenere il FragmentManager e gestire i fragment.
+                    onBackPressedListener.onBackButtonPressed(MainActivity.class);
+                }
+            }
+        });
 
         return view;
     }
@@ -79,6 +110,7 @@ public class PieChartFragment extends Fragment {
         PieDataSet dataSet = new PieDataSet(entries, "Attacks");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
+
         // Crea e restituisci l'oggetto PieData per il grafico a torta
         return new PieData(dataSet);
     }
@@ -118,6 +150,8 @@ public class PieChartFragment extends Fragment {
        // PieData data = new PieData(dataSet);
         pieChart.setData(entrie);
         pieChart.invalidate();
+        pieChart.getDescription().setEnabled(false);
+
     }
 
 
