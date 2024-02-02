@@ -31,6 +31,7 @@ public class PieChartFragment extends Fragment {
     private PieChart pieChart;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -38,11 +39,11 @@ public class PieChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.pie_chart_fragment, container, false);
         pieChart = view.findViewById(R.id.pieChart);
         ImageButton backButton = view.findViewById(R.id.backButton);
-
         backButton.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {getActivity().onBackPressed();}});
 
         return view;
     }
+
 
 
 
