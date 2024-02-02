@@ -17,7 +17,6 @@ import java.util.List;
 
 import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.Interface.StatsDataListener;
-import tesi.example.myapplication.MainActivity;
 
 public class StatsFragment extends Fragment implements View.OnClickListener, StatsDataListener {
 
@@ -97,6 +96,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
                 buttonId = StatsDataListener.BUTTON_PIE_CHART;
 
 
+
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
@@ -105,9 +105,8 @@ public class StatsFragment extends Fragment implements View.OnClickListener, Sta
 
         if (statsDataListener != null) {
             statsDataListener.onStatsButtonClick(buttonId);
-            if (getActivity() != null && getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).showBottomNavigationView();
-            }
+
+
 
         }
     }
