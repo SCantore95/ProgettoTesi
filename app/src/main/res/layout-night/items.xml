@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/CardView.Light"
@@ -11,21 +13,33 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="12dp">
 
 
-
         <TextView
-            android:id="@+id/id_text"
-            android:layout_width="144dp"
-            android:layout_height="23dp"
+            android:id="@+id/description_text"
+            android:layout_width="342dp"
+            android:layout_height="30dp"
+
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-android:textAlignment="center"
-            android:textColor="@color/black"
+            android:text="prova"
+            android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/startDate_text"
+            android:layout_width="342dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:text="prova"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.301"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

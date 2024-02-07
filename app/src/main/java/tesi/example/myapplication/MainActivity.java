@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationBarView;
@@ -35,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements
     private static final String TAG = "mytag";
     List<ResultsItem> attackLists;
     BottomNavigationView bottomNavigationView;
+    ConstraintLayout bottomUser;
     BottomSheetDialog bottomSheetDialog;
+    BottomAppBar bottomAppBar;
     //TextView usernameTextView;
     CounterFragment counter = new CounterFragment();
     StatsFragment stats = new StatsFragment();
@@ -50,16 +56,17 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.basic_layout_main_activity);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomUser=findViewById(R.id.user_details_container);
+        bottomAppBar=findViewById(R.id.bottomAppBar);
         stats.setStatsDataListener(this);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         transaction.add(R.id.fragment_container, profile, "ProfileFragment")
                 .hide(profile)
-                .add(R.id.fragment_container, counter, "CounterFragment")
+               // .add(R.id.fragment_container, counter, "CounterFragment")
                 .hide(counter)
                 .add(R.id.fragment_container, stats, "StatsFragment")
                 .hide(stats)
@@ -75,9 +82,9 @@ public class MainActivity extends AppCompatActivity implements
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
                 switch (item.getItemId()) {
-                    case R.id.counter:
-                        transaction.hide(profile).hide(stats).show(counter).commit();
-                        break;
+                    //case R.id.counter:
+                     // transaction.hide(profile).hide(stats).show(counter).commit();
+                       // break;
                     case R.id.profile:
                         transaction.hide(counter).hide(stats).show(profile).commit();
                         break;
@@ -129,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements
                 if (pieChartFragment != null) {
                     // Aggiorna i dati del grafico a torta nel fragment
                     pieChartFragment.setPieChartData(stats.getCurrentData());
+                    hideBottomNavigationView();
+
 
                     if (!pieChartFragment.isAdded()) {
                         transaction.add(R.id.fragment_container, pieChartFragment, "PieChartFragment");
@@ -142,7 +151,11 @@ public class MainActivity extends AppCompatActivity implements
                         transaction.add(R.id.fragment_container, pieChartFragment, "PieChartFragment");
 
                         getSupportFragmentManager().beginTransaction().show(pieChartFragment).addToBackStack(null).commit();
-                        bottomNavigationView.setVisibility(View.GONE);
+
+
+
+
+
 
 
 
@@ -154,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements
                 if (barChartFragment != null) {
                     // Aggiorna i dati del grafico a torta nel fragment
                     barChartFragment.setBarChartData(stats.getCurrentData());
-
+                    hideBottomNavigationView();
                     if (!barChartFragment.isAdded()) {
                         transaction.add(R.id.fragment_container, barChartFragment, "BarChartFragment");
 
@@ -165,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements
                     } else {
                         // Se il fragment è già stato aggiunto, mostra semplicemente il fragment
                         getSupportFragmentManager().beginTransaction().hide(stats).commit();
-                       bottomNavigationView.setVisibility(View.GONE);
+
                         getSupportFragmentManager().beginTransaction().show(barChartFragment).addToBackStack(null).commit();
 
 
@@ -174,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
                     break;
 
                 }
-                // Altri casi se necessario
+
         }
     }
 
@@ -183,6 +196,21 @@ public class MainActivity extends AppCompatActivity implements
 
     public void hideBottomNavigationView() {
         bottomNavigationView.setVisibility(View.GONE);
+      //  bottomAppBar.setVisibility(View.GONE);
+
+
+    }
+    public void hideBottomNavigationAppBar() {
+       bottomAppBar.setVisibility(View.GONE);
+    }
+    public void hideBottomUser (){
+        bottomUser.setVisibility(View.GONE);
+    }
+   public void showBottomUser (){
+        bottomUser.setVisibility(View.VISIBLE);
+    }
+    public void showBottomNavigationAppBar(){
+        bottomAppBar.setVisibility(View.VISIBLE);
     }
 
     public void showBottomNavigationView(){
@@ -197,8 +225,12 @@ public class MainActivity extends AppCompatActivity implements
 
         if (currentFragment instanceof BarChartFragment
                 || currentFragment instanceof PieChartFragment) {
-            // Handle the back press for BarChartFragment, PieChartFragment, or ItemDetailsFragment
+            // Handle the back press for BarChartFragment, PieChartFragment
             bottomNavigationView.setVisibility(View.VISIBLE);
+            bottomAppBar.setVisibility(View.VISIBLE);
+
+            bottomUser.setVisibility(View.VISIBLE);
+
             getSupportFragmentManager().beginTransaction()
                     .hide(barChartFragment)
                     .hide(pieChartFragment)

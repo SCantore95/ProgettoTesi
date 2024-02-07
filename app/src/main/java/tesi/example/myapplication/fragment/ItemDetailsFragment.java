@@ -50,6 +50,9 @@ public class ItemDetailsFragment extends Fragment {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageButton backButton = view.findViewById(R.id.backButton);
         if (getActivity() != null && getActivity() instanceof MainActivity) {
             ((MainActivity) getActivity()).hideBottomNavigationView();
+            ((MainActivity) getActivity()).hideBottomUser();
+            ((MainActivity) getActivity()).hideBottomNavigationAppBar();
+
         }
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
