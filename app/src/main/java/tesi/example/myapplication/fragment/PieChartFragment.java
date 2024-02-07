@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -52,20 +53,21 @@ public class PieChartFragment extends Fragment {
     private PieData extractPieChartData(List<ResultsItem> currentData) {
         // Mappa per tenere traccia del conteggio degli attacchi per ciascun mese
         Map<Integer, Integer> attackCountMap = new HashMap<>();
+        if (currentData != null) {
+            Iterator<ResultsItem> iterator = currentData.iterator();
+            // Itera attraverso i risultati per conteggiare gli attacchi per ID
+            for (ResultsItem item : currentData) {
+                // Estrarre il mese dalla data dell'attacco
+                String attackDate = item.getStartDate();
+                int month = extractMonthFromDate(attackDate);
 
-        // Itera attraverso i risultati per conteggiare gli attacchi per ID
-        for (ResultsItem item : currentData) {
-            // Estrarre il mese dalla data dell'attacco
-            String attackDate = item.getStartDate();
-            int month = extractMonthFromDate(attackDate);
-
-            // Incrementa il conteggio degli attacchi per il mese corrente
-            if (month != -1) {
-                int count = attackCountMap.getOrDefault(month, 0);
-                attackCountMap.put(month, count + 1);
+                // Incrementa il conteggio degli attacchi per il mese corrente
+                if (month != -1) {
+                    int count = attackCountMap.getOrDefault(month, 0);
+                    attackCountMap.put(month, count + 1);
+                }
             }
         }
-
         // Lista di PieEntry per i dati del grafico a torta
         ArrayList<PieEntry> entries = new ArrayList<>();
 

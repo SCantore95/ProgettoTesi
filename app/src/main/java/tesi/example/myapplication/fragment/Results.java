@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -58,9 +59,11 @@ public class Results extends RecyclerView.Adapter<Results.MyViewHolder> {
     public void onBindViewHolder(@NonNull Results.MyViewHolder holder, int position) {
         ResultsItem currentItem = mData.get(position);
 
-        holder.id.setText(currentItem.getId());
+        holder.description.setText(currentItem.getDescription());
+        holder.startDate.setText(currentItem.getStartDate());
 
-        holder.id.setOnClickListener(new View.OnClickListener() {
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (itemClickListener != null) {
@@ -81,17 +84,18 @@ public class Results extends RecyclerView.Adapter<Results.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+        CardView cardView;
 
-        TextView id;
+        TextView description;
+        TextView startDate;
 
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
-            id=itemView.findViewById(R.id.id_text);
-
+            cardView=itemView.findViewById(R.id.card);
+            description=itemView.findViewById(R.id.description_text);
+            startDate=itemView.findViewById(R.id.startDate_text);
 
         }
     }

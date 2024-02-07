@@ -13,5 +13,4 @@ public interface StatsDataListener {
 
     void onStatsButtonClick(int buttonId);
 
-
 }
