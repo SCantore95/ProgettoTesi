@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,13 +18,10 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.List;
 
-import tesi.example.myapplication.fragment.CounterFragment;
+import tesi.example.myapplication.fragment.StatsFragment;
 import tesi.example.myapplication.fragment.ItemDetailsFragment;
 import tesi.example.myapplication.fragment.ProfileFragment;
 import tesi.example.myapplication.fragment.ResultsItem;
-import tesi.example.myapplication.fragment.StatsFragment;
-import tesi.example.myapplication.fragment.PieChartFragment;
-import tesi.example.myapplication.fragment.BarChartFragment;
 import easy.tuto.bottomnavigationfragmentdemo.R;
 import tesi.example.myapplication.Interface.StatsDataListener;
 
@@ -43,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements
     BottomSheetDialog bottomSheetDialog;
     BottomAppBar bottomAppBar;
     //TextView usernameTextView;
-    CounterFragment counter = new CounterFragment();
     StatsFragment stats = new StatsFragment();
+   // StatsFragment stats = new StatsFragment();
     ProfileFragment profile = new ProfileFragment();
     PieChartFragment pieChartFragment = new PieChartFragment();
     BarChartFragment barChartFragment = new BarChartFragment();
@@ -60,20 +55,16 @@ public class MainActivity extends AppCompatActivity implements
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomUser=findViewById(R.id.user_details_container);
         bottomAppBar=findViewById(R.id.bottomAppBar);
-        stats.setStatsDataListener(this);
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         transaction.add(R.id.fragment_container, profile, "ProfileFragment")
                 .hide(profile)
-               // .add(R.id.fragment_container, counter, "CounterFragment")
-                .hide(counter)
-                .add(R.id.fragment_container, stats, "StatsFragment")
+               .add(R.id.fragment_container, stats, "StatsFragment")
+
+               // .add(R.id.fragment_container, stats, "StatsFragment")
                 .hide(stats)
-                .add(R.id.fragment_container, pieChartFragment, "PieChartFragment")
-                .hide(pieChartFragment)
-                .add(R.id.fragment_container, barChartFragment, "BarChartFragment")
-                .hide(barChartFragment)
                 .commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -86,10 +77,12 @@ public class MainActivity extends AppCompatActivity implements
                      // transaction.hide(profile).hide(stats).show(counter).commit();
                        // break;
                     case R.id.profile:
-                        transaction.hide(counter).hide(stats).show(profile).commit();
+                        showBottomUser();
+                        transaction.hide(stats).show(profile).commit();
                         break;
                     case R.id.stats:
-                        transaction.hide(counter).hide(profile).show(stats).commit();
+                        hideBottomUser();
+                        transaction.hide(profile).show(stats).commit();
                         // bottomNavigationView.setVisibility(View.GONE);
                         break;
                     // Add a case for BarChartFragment if necessary
@@ -112,14 +105,11 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onProfileDataAvailable(List<ResultsItem> attackLists) {
-        if (counter.isHidden() || counter.isDetached()) {
-            counter.updateCounterData(attackLists);
+        if (stats.isHidden() || stats.isDetached()) {
+            stats.updateCounterData(attackLists);
             Log.d(TAG, "Data passed to CounterFragment. Size w: " + attackLists.size());
         }
-        if (stats.isHidden() || stats.isDetached()) {
-            stats.onStatsDataAvailable(attackLists);
-            Log.d(TAG, "Data passed to StatsFragment. Size: " + attackLists.size());
-        }
+
     }
 
     @Override
@@ -135,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements
                 // Verifica che pieChartFragment non sia nullo
                 if (pieChartFragment != null) {
                     // Aggiorna i dati del grafico a torta nel fragment
-                    pieChartFragment.setPieChartData(stats.getCurrentData());
+                    //pieChartFragment.setPieChartData(stats.getCurrentData());
                     hideBottomNavigationView();
 
 
@@ -166,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements
                 // Verifica che pieChartFragment non sia nullo
                 if (barChartFragment != null) {
                     // Aggiorna i dati del grafico a torta nel fragment
-                    barChartFragment.setBarChartData(stats.getCurrentData());
+                  //  barChartFragment.setBarChartData(stats.getCurrentData());
                     hideBottomNavigationView();
                     if (!barChartFragment.isAdded()) {
                         transaction.add(R.id.fragment_container, barChartFragment, "BarChartFragment");
@@ -223,8 +213,7 @@ public class MainActivity extends AppCompatActivity implements
         // Check if any specific fragment is visible and handle the back press accordingly
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        if (currentFragment instanceof BarChartFragment
-                || currentFragment instanceof PieChartFragment) {
+        if (currentFragment instanceof StatsFragment) {
             // Handle the back press for BarChartFragment, PieChartFragment
             bottomNavigationView.setVisibility(View.VISIBLE);
             bottomAppBar.setVisibility(View.VISIBLE);
@@ -232,8 +221,7 @@ public class MainActivity extends AppCompatActivity implements
             bottomUser.setVisibility(View.VISIBLE);
 
             getSupportFragmentManager().beginTransaction()
-                    .hide(barChartFragment)
-                    .hide(pieChartFragment)
+                    .hide(stats)
                     .hide(itemDetailsFragment)
                     .commit();
         } else {

@@ -33,7 +33,7 @@ import tesi.example.myapplication.MainActivity;
 public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
     private static final int LOADER_ID = 1;
-    private static final String JSON_URL = "https://run.mocky.io/v3/1aadc7eb-0122-43cd-92f8-83ab1b167267";
+    private static final String JSON_URL = "https://run.mocky.io/v3/12404e2f-c72a-4474-9948-d6c36250084a";
     private static final String TAG = "ProfileFragment";
     private ItemClickListener mItemClickListener;
 
@@ -69,12 +69,13 @@ public  class ProfileFragment extends Fragment implements ItemClickListener, Loa
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         attackLists = new ArrayList<>();
         mItemClickListener = this;
         if (getActivity() != null && getActivity() instanceof MainActivity) {
             ((MainActivity) getActivity()).showBottomNavigationView();
+
             ((MainActivity) getActivity()).showBottomUser();
             ((MainActivity) getActivity()).showBottomNavigationAppBar();
 
