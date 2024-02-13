@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements
     BottomAppBar bottomAppBar;
 
     StatsFragment stats = new StatsFragment();
-
     ProfileFragment profile = new ProfileFragment();
 
 
