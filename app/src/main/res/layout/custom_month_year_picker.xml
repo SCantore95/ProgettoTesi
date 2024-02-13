@@ -4,17 +4,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-
+    <NumberPicker
+        android:id="@+id/dayPicker"
+        android:layout_width="82dp"
+        android:layout_height="170dp"
+        android:textAlignment="gravity" />
     <NumberPicker
         android:id="@+id/monthPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="82dp"
+        android:layout_height="170dp"
         android:textAlignment="gravity"
-        android:layout_marginRight="8dp"/>
+        android:layout_marginRight="12dp"/>
 
     <NumberPicker
         android:id="@+id/yearPicker"
-        android:textAlignment="gravity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="139dp"
+        android:layout_height="match_parent"
+        android:textAlignment="gravity" />
+
 </LinearLayout>

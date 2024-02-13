@@ -13,6 +13,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="selected_month">Numero di attacchi nel mese di: %1$d-%2$d</string>
     <string name="attack_count">Attack Count: %d</string>
+    <string name="back">back</string>
 
 
 </resources>
