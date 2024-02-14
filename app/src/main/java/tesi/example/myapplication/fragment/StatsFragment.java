@@ -1,6 +1,7 @@
 package tesi.example.myapplication.fragment;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -235,63 +236,114 @@ List<ResultsItem> filteredData= new ArrayList<>();
 
 
 
+
+
     private PieData extractPieChartData(List<ResultsItem> currentData) {
-        Map<Integer, Integer> attackCountMap = new HashMap<>();
-        for (ResultsItem item : currentData) {
-            String attackDate = item.getStartDate();
-            int month = extractMonthFromDate(attackDate);
-            if (month != -1) {
-                int count = attackCountMap.getOrDefault(month, 0);
-                attackCountMap.put(month, count + 1);
-            }
-        }
+        // Array di nomi dei mesi
+        String[] monthNames = new String[]{"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"};
+
+        // Mappa per tenere traccia del conteggio delle categorie
+        Map<String, Integer> categoryCountMap = new HashMap<>();
         int totalAttacks = currentData.size();
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : attackCountMap.entrySet()) {
-            int month = entry.getKey();
-            int count = entry.getValue();
-            float percentage = totalAttacks ;
-            entries.add(new PieEntry(percentage, getMonthName(month)));
+
+        // Contatori per le categorie specifiche
+        int vehicleDosCount = 0;
+        int vehicleFuzzyCount = 0;
+        String attackDate = null;
+
+        for (ResultsItem item : currentData) {
+             attackDate = item.getStartDate();
+            int itemMonth = extractMonthFromDate(attackDate);
+
+            // Aggiorna i contatori delle categorie specifiche
+            if ("Vehicle: DoS with high priority".equals(item.getDescription())) {
+                vehicleDosCount++;
+            } else if ("Vehicle: Fuzzy with high priority".equals(item.getDescription())) {
+                vehicleFuzzyCount++;
+            }
+
+            if (itemMonth != -1) {
+                String monthName = monthNames[itemMonth - 1]; // Sottrai 1 perché gli array iniziano da 0
+                int count = categoryCountMap.getOrDefault(monthName, 0);
+                categoryCountMap.put(monthName, count + 1);
+
+
+            }
+
         }
-        PieDataSet dataSet = new PieDataSet(entries, "Attacks");
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+
+        // Aggiungi le voci per le categorie specifiche
+        if (vehicleDosCount > 0) {
+            entries.add(new PieEntry(vehicleDosCount, "DoS")); // Aggiungi "DoS" come etichetta nel grafico
+        }
+
+        if (vehicleFuzzyCount > 0) {
+            entries.add(new PieEntry(vehicleFuzzyCount, "Fuzzy")); // Aggiungi "Fuzzy" come etichetta nel grafico
+        }
+
+
+
+        PieDataSet dataSet = new PieDataSet(entries,attackDate); // Imposta null come etichetta del grafico a torta
+        dataSet.setValueTextSize(15f);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         return new PieData(dataSet);
     }
 
-    private String getMonthName(int month) {
-        String[] monthNames = new String[]{"Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"};
-        if (month >= 1 && month <= 12) {
-            return monthNames[month - 1];
-        } else {
-            return "Invalid Month";
-        }
-    }
+
+
 
     private BarData extractBarChartData(List<ResultsItem> currentData) {
         int totalAttacks = currentData.size();
-        int[] attackCountsPerMonth = new int[12];
+        int[] dosCountsPerMonth = new int[12];
+        int[] fuzzyCountsPerMonth = new int[12];
+        String attackDate=null;
         for (ResultsItem item : currentData) {
-            String attackDate = item.getStartDate();
+             attackDate = item.getStartDate();
             int month = extractMonthFromDate(attackDate);
-            if (month != -1) {
-                attackCountsPerMonth[month - 1]++;
+
+            // Aggiorna i contatori per le categorie specifiche
+            if ("Vehicle: DoS with high priority".equals(item.getDescription())) {
+                dosCountsPerMonth[month - 1]++;
+            } else if ("Vehicle: Fuzzy with high priority".equals(item.getDescription())) {
+                fuzzyCountsPerMonth[month - 1]++;
             }
         }
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        for (int month = 0; month < 12; month++) {
-            int attacksInMonth = attackCountsPerMonth[month];
-            float percentage =  attacksInMonth;
-            entries.add(new BarEntry(month, percentage));
-        }
-        BarDataSet dataSet = new BarDataSet(entries, "Attacks");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        BarData barData = new BarData(dataSet);
+
+
+
+        ArrayList<BarEntry> dosEntries = new ArrayList<>();
+        ArrayList<BarEntry> fuzzyEntries = new ArrayList<>();
         String[] months = new String[]{"Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"};
+
+        for (int month = 0; month < 12; month++) {
+            dosEntries.add(new BarEntry(month, dosCountsPerMonth[month]));
+            fuzzyEntries.add(new BarEntry(month, fuzzyCountsPerMonth[month]));
+        }
+
+
+        BarDataSet dosDataSet = new BarDataSet(dosEntries, "Dos  ");
+        dosDataSet.setColor(Color.BLUE);
+        dosDataSet.setValueTextSize(4f);
+
+        BarDataSet fuzzyDataSet = new BarDataSet(fuzzyEntries, "Fuzzy   "+attackDate);
+        fuzzyDataSet.setColor(Color.RED);
+        fuzzyDataSet.setValueTextSize(4f);
+
+        BarData barData = new BarData(dosDataSet, fuzzyDataSet);
+        barData.setBarWidth(0.22f); // Imposta la larghezza delle barre
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(months));
+
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(0.5F);
-        xAxis.setLabelCount(11);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelCount(12);
+
+        barChart.setData(barData);
+        barChart.groupBars(0, 0.22f, 0.14f);
+
         return barData;
     }
 
@@ -301,7 +353,7 @@ List<ResultsItem> filteredData= new ArrayList<>();
         }
         List<ResultsItem> filteredData = filterDataByDate(entries, selectedYear, selectedMonth, selectedDay);
         if (!filteredData.isEmpty()) {
-            PieData pieData = extractPieChartData(filteredData);
+           PieData pieData = extractPieChartData(filteredData);
             pieChart.setData(pieData);
             pieChart.invalidate();
             pieChart.getDescription().setEnabled(false);
