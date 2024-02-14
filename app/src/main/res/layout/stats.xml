@@ -17,7 +17,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/button_with_stroke"
             android:freezesText="true"
-            android:text="Set the desired date:XXXXX"
+            android:text="Set the desired date"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
