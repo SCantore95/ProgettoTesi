@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:visibility="visible">
 
 
     <androidx.fragment.app.FragmentContainerView
+
         android:id="@+id/fragment_container"
         android:layout_width="416dp"
         android:layout_height="739dp"
         app:layout_anchor="@+id/constraintLayout3"
         app:layout_anchorGravity="center"
-        tools:ignore="MissingConstraints" />
+
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_details_container"
-        android:layout_width="395dp"
-        android:layout_height="144dp"
+        android:layout_width="344dp"
+        android:layout_height="68dp"
         android:layout_margin="10dp"
         android:elevation="8dp"
         app:cardCornerRadius="3dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="193dp"
+            android:layout_height="60dp"
+            android:fontFamily="sans-serif-black"
+            android:text="User"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.642"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/user_propic_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            app:cardBackgroundColor="#000000"
             app:cardCornerRadius="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <ImageView
                 android:id="@+id/member_icon"
                 android:layout_width="57dp"
                 android:layout_height="62dp"
-                android:src="@drawable/ic_baseline_person_24" />
+                android:src="@drawable/ic_baseline_person_24_white" />
 
         </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="logout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,13 +70,15 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/white"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
         app:fabAlignmentMode="center"
         app:fabCradleMargin="7dp"
         app:fabCradleRoundedCornerRadius="12dp"
-        app:fabCradleVerticalOffset="1dp">
+        app:fabCradleVerticalOffset="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -73,12 +88,12 @@
             android:layout_marginVertical="5dp"
             android:background="@drawable/bottom_navbar_drawable"
             app:itemIconSize="24dp"
-            app:itemIconTint="@android:color/white"
+            app:itemIconTint="@color/black"
             app:itemRippleColor="#3F51B5"
 
-            app:itemTextColor="@color/white"
+            app:itemTextColor="@color/black"
 
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_nav_menu" />
 
 
@@ -88,8 +103,11 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_anchor="@+id/user_details_container"
-        app:layout_anchorGravity="center"/>
+
+        app:layout_anchor="@+id/constraintLayout3"
+        app:layout_anchorGravity="center" >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
