@@ -33,7 +33,7 @@ import tesi.example.myapplication.MainActivity;
 public  class ProfileFragment extends Fragment implements ItemClickListener, LoaderManager.LoaderCallbacks<List<ResultsItem>> {
 
     private static final int LOADER_ID = 1;
-    private static final String JSON_URL = "https://run.mocky.io/v3/12404e2f-c72a-4474-9948-d6c36250084a";
+    private static final String JSON_URL = "https://mocki.io/v1/66827b79-0c59-4526-896d-3b55c4684091";
     private static final String TAG = "ProfileFragment";
     private ItemClickListener mItemClickListener;
 
