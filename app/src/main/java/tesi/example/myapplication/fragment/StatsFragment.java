@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -83,6 +84,7 @@ List<ResultsItem> filteredData= new ArrayList<>();
 
 
 
+
         return view;
     }
 
@@ -136,6 +138,7 @@ List<ResultsItem> filteredData= new ArrayList<>();
         });
         builder.setNegativeButton("Annulla", null);
 
+
         builder.show();
     }
 
@@ -167,6 +170,7 @@ List<ResultsItem> filteredData= new ArrayList<>();
 
     private List<ResultsItem> filterDataByDate(List<ResultsItem> data, int day, int month, int year) {
 
+
         for (ResultsItem item : data) {
             String startDate = item.getStartDate();
             Log.d(TAG, "Original date in filterDataByDate: " + startDate);
@@ -178,11 +182,14 @@ List<ResultsItem> filteredData= new ArrayList<>();
             Log.d(TAG, "itemYear: " + itemYear + ", itemMonth: " + itemMonth + ", itemDay: " + itemDay);
             if (itemYear == year && itemMonth == month && itemDay == day) {
                 filteredData.add(item);
+
                 Log.d(TAG, "filterDataByDate: "+filteredData.size());
-            }else{
-                Log.d(TAG, "non passa nulla:siamo nel else ");
             }
         }
+       if( filteredData.isEmpty()) {
+            Toast.makeText(getContext(), "No attacks found", Toast.LENGTH_SHORT).show();
+        }
+
         return filteredData;
     }
 
@@ -304,7 +311,7 @@ List<ResultsItem> filteredData= new ArrayList<>();
              attackDate = item.getStartDate();
             int month = extractMonthFromDate(attackDate);
 
-            // Aggiorna i contatori per le categorie specifiche
+
             if ("Vehicle: DoS with high priority".equals(item.getDescription())) {
                 dosCountsPerMonth[month - 1]++;
             } else if ("Vehicle: Fuzzy with high priority".equals(item.getDescription())) {
